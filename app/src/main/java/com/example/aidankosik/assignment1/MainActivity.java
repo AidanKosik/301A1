@@ -1,5 +1,6 @@
 package com.example.aidankosik.assignment1;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -8,15 +9,22 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.view.View.OnClickListener;
 import android.widget.Toast;
+
+import java.util.Iterator;
+import java.util.List;
+import java.util.Vector;
 
 
 public class MainActivity extends AppCompatActivity {
     public Button b_add, b_delete;
     public ListView c_subscriptions;
+    public static Vector<subscription> subscriptionVector;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,14 +33,13 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        Button b_add = (Button) findViewById(R.id.add);
-        Button b_delete = (Button) findViewById(R.id.delete);
+        b_add = (Button) findViewById(R.id.add);
+        b_delete = (Button) findViewById(R.id.delete);
 
         b_add.setText("Add");
         b_delete.setText("Delete");
 
-        ListView c_subscriptions = (ListView) findViewById(R.id.subs);
-
+        c_subscriptions = (ListView) findViewById(R.id.subs);
 
     }
 
@@ -40,13 +47,6 @@ public class MainActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
-
-//        b_add.setOnClickListener(new OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Toast .makeText(MainActivity.this, "Button Clicked", Toast.LENGTH_SHORT).show();
-//            }
-//        });
 
         return true;
     }
@@ -64,5 +64,10 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void addClick(View view) {
+        Intent addIntent = new Intent(this, addSubscription.class);
+        startActivity(addIntent);
     }
 }
